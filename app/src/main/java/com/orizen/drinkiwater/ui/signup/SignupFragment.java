@@ -4,6 +4,9 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -23,8 +26,13 @@ public class SignupFragment extends Fragment {
     ) {
 
         binding = FragmentSignupBinding.inflate(inflater, container, false);
-        return binding.getRoot();
 
+        final EditText emailEditText = binding.editTextEmailAddress;
+        final EditText passwordEditText = binding.editTextPassword;
+        final EditText confirmPasswordEditText = binding.editTextConfirmPassword;
+        final Button saveButton = binding.buttonSaveUser;
+
+        return binding.getRoot();
     }
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
@@ -33,8 +41,12 @@ public class SignupFragment extends Fragment {
         binding.buttonSaveUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                NavHostFragment.findNavController(SignupFragment.this)
-                        .navigate(R.id.action_FirstFragment_to_SecondFragment);
+//                NavHostFragment.findNavController(SignupFragment.this)
+//                        .navigate(R.id.action_FirstFragment_to_SecondFragment);
+
+
+
+                //binding.errorMessagesView
             }
         });
     }
