@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel;
 
 import android.util.Patterns;
 
+import com.orizen.drinkiwater.MainActivity;
 import com.orizen.drinkiwater.data.LoginRepository;
 import com.orizen.drinkiwater.data.Result;
 import com.orizen.drinkiwater.data.model.LoggedInUser;
@@ -31,6 +32,7 @@ public class LoginViewModel extends ViewModel {
 
     public void login(String username, String password) {
         // can be launched in a separate asynchronous job
+
         Result<LoggedInUser> result = loginRepository.login(username, password);
 
         if (result instanceof Result.Success) {

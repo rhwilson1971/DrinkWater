@@ -23,6 +23,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.orizen.drinkiwater.R;
+import com.orizen.drinkiwater.data.AppDatabase;
+import com.orizen.drinkiwater.data.DrinkAppRepository;
 import com.orizen.drinkiwater.ui.login.LoginViewModel;
 import com.orizen.drinkiwater.ui.login.LoginViewModelFactory;
 import com.orizen.drinkiwater.databinding.ActivityLoginBinding;
@@ -41,6 +43,8 @@ public class LoginActivity extends AppCompatActivity {
 
         loginViewModel = new ViewModelProvider(this, new LoginViewModelFactory())
                 .get(LoginViewModel.class);
+
+        DrinkAppRepository.create(this.getApplicationContext());
 
         final EditText usernameEditText = binding.username;
         final EditText passwordEditText = binding.password;
@@ -120,6 +124,7 @@ public class LoginActivity extends AppCompatActivity {
                 loadingProgressBar.setVisibility(View.VISIBLE);
                 loginViewModel.login(usernameEditText.getText().toString(),
                         passwordEditText.getText().toString());
+
             }
         });
     }

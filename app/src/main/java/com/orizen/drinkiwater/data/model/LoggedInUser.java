@@ -1,5 +1,7 @@
 package com.orizen.drinkiwater.data.model;
 
+import androidx.lifecycle.LiveData;
+
 import com.orizen.drinkiwater.data.entities.User;
 
 /**
@@ -10,11 +12,12 @@ public class LoggedInUser {
     private String userId;
     private String displayName;
 
-    private User user;
+    private LiveData<User> user;
 
-    public LoggedInUser(String userId, String displayName) {
+    public LoggedInUser(String userId, String displayName, LiveData<User> dbUser) {
         this.userId = userId;
         this.displayName = displayName;
+        this.user = dbUser;
     }
 
     public String getUserId() {

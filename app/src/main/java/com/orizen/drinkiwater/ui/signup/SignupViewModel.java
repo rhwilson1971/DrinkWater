@@ -10,47 +10,44 @@ import com.orizen.drinkiwater.R;
 import com.orizen.drinkiwater.data.LoginRepository;
 import com.orizen.drinkiwater.data.Result;
 import com.orizen.drinkiwater.data.model.LoggedInUser;
-import com.orizen.drinkiwater.ui.login.LoggedInUserView;
-import com.orizen.drinkiwater.ui.login.LoginFormState;
-import com.orizen.drinkiwater.ui.login.LoginResult;
 
 public class SignupViewModel extends ViewModel {
 
-    private MutableLiveData<LoginFormState> loginFormState = new MutableLiveData<>();
-    private MutableLiveData<LoginResult> loginResult = new MutableLiveData<>();
+    private MutableLiveData<SignupFormState> signupFormState = new MutableLiveData<>();
+    // private MutableLiveData<LoginResult> loginResult = new MutableLiveData<>();
     private LoginRepository loginRepository;
 
     SignupViewModel(LoginRepository loginRepository) {
         this.loginRepository = loginRepository;
     }
 
-    LiveData<LoginFormState> getLoginFormState() {
-        return loginFormState;
+    LiveData<SignupFormState> getLoginFormState() {
+        return signupFormState;
     }
 
-    LiveData<LoginResult> getLoginResult() {
-        return loginResult;
-    }
+//    LiveData<LoginResult> getLoginResult() {
+//        return loginResult;
+//    }
 
     public void login(String username, String password) {
         // can be launched in a separate asynchronous job
         Result<LoggedInUser> result = loginRepository.login(username, password);
 
-        if (result instanceof Result.Success) {
-            LoggedInUser data = ((Result.Success<LoggedInUser>) result).getData();
-            loginResult.setValue(new LoginResult(new LoggedInUserView(data.getDisplayName())));
-        } else {
-            loginResult.setValue(new LoginResult(R.string.login_failed));
-        }
+//        if (result instanceof Result.Success) {
+//            LoggedInUser data = ((Result.Success<LoggedInUser>) result).getData();
+//            loginResult.setValue(new LoginResult(new LoggedInUserView(data.getDisplayName())));
+//        } else {
+//            loginResult.setValue(new LoginResult(R.string.login_failed));
+//        }
     }
 
     public void loginDataChanged(String username, String password) {
         if (!isUserNameValid(username)) {
-            loginFormState.setValue(new LoginFormState(R.string.invalid_username, null));
+            signupFormState.setValue(new SignupFormState(R.string.invalid_username, null));
         } else if (!isPasswordValid(password)) {
-            loginFormState.setValue(new LoginFormState(null, R.string.invalid_password));
+            signupFormState.setValue(new SignupFormState(null, R.string.invalid_password));
         } else {
-            loginFormState.setValue(new LoginFormState(true));
+            signupFormState.setValue(new SignupFormState(true));
         }
     }
 
