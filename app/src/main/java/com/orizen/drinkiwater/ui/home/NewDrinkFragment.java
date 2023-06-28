@@ -97,7 +97,7 @@ public class NewDrinkFragment extends Fragment {
             newDrink.Name = name;
             newDrink.dateAdded = new Date();
 
-            DrinkAppRepository.getInstance(container.getContext()).drinkItemDao().insert(newDrink);
+            DrinkAppRepository.getInstance().drinkItemDao().insert(newDrink);
 
         });
 

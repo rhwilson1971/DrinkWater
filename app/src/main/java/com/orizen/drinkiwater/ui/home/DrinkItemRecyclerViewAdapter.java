@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.orizen.drinkiwater.data.model.DrinkItemEntry;
 import com.orizen.drinkiwater.databinding.FragmentItemBinding;
 import com.orizen.drinkiwater.ui.placeholder.PlaceholderContent.PlaceholderItem;
 
@@ -17,9 +18,9 @@ import java.util.List;
  */
 public class DrinkItemRecyclerViewAdapter extends RecyclerView.Adapter<DrinkItemRecyclerViewAdapter.ViewHolder> {
 
-    private final List<PlaceholderItem> mValues;
+    private final List<DrinkItemEntry> mValues;
 
-    public DrinkItemRecyclerViewAdapter(List<PlaceholderItem> items) {
+    public DrinkItemRecyclerViewAdapter(List<DrinkItemEntry> items) {
         mValues = items;
     }
 
@@ -33,8 +34,8 @@ public class DrinkItemRecyclerViewAdapter extends RecyclerView.Adapter<DrinkItem
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
-        holder.mIdView.setText(mValues.get(position).id);
-        holder.mContentView.setText(mValues.get(position).content);
+        holder.drinkAmount.setText(mValues.get(position).getAmount().toString());
+        holder.drinkName.setText(mValues.get(position).getDrinkName());
     }
 
     @Override
@@ -43,19 +44,18 @@ public class DrinkItemRecyclerViewAdapter extends RecyclerView.Adapter<DrinkItem
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        public final TextView mIdView;
-        public final TextView mContentView;
-        public PlaceholderItem mItem;
-
+        public final TextView drinkName;
+        public final TextView drinkAmount;
+        public DrinkItemEntry mItem;
         public ViewHolder(FragmentItemBinding binding) {
             super(binding.getRoot());
-            mIdView = binding.itemNumber;
-            mContentView = binding.content;
+            drinkName = binding.textViewDrink;
+            drinkAmount = binding.textViewAmount;
         }
 
         @Override
         public String toString() {
-            return super.toString() + " '" + mContentView.getText() + "'";
+            return super.toString() + " '" + drinkName.getText() + "' " + drinkAmount.getText() + "'";
         }
     }
 }

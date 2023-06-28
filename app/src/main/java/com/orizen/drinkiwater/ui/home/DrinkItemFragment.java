@@ -13,6 +13,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.orizen.drinkiwater.R;
+import com.orizen.drinkiwater.data.entities.DrinkItem;
+import com.orizen.drinkiwater.data.model.DrinkItemEntry;
 import com.orizen.drinkiwater.ui.placeholder.PlaceholderContent;
 
 /**
@@ -65,7 +67,7 @@ public class DrinkItemFragment extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            recyclerView.setAdapter(new DrinkItemRecyclerViewAdapter(PlaceholderContent.ITEMS));
+            recyclerView.setAdapter(new DrinkItemRecyclerViewAdapter(DrinkItemEntry.getDummyContent()));
         }
         return view;
     }

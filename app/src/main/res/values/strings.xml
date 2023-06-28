@@ -65,4 +65,7 @@
     <string name="save">Save</string>
     <string name="create_account">Create an account.</string>
     <string name="confirm_password">Confirm Password</string>
+    <string name="drink_amount_hint">Amount (OZ)</string>
+    <string name="drink_name_hint">Water, Soda, etc.</string>
+    <string name="drink_item_content_description">Drinking cup</string>
 </resources>
