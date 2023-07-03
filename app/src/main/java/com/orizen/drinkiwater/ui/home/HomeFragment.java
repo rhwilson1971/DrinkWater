@@ -19,19 +19,15 @@ import org.eazegraph.lib.models.PieModel;
 public class HomeFragment extends Fragment {
 
     private FragmentHomeBinding binding;
-    private PieChart pieChart;
 
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
-        HomeViewModel homeViewModel =
-                new ViewModelProvider(this).get(HomeViewModel.class);
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        HomeViewModel homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
 
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        pieChart = binding.piechart;
-        //homeViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
-
+        PieChart pieChart = binding.piechart;
+        homeViewModel.getPieModel().observe(getViewLifecycleOwner(), pieChart::addPieSlice);
 
         return root;
     }
@@ -40,28 +36,5 @@ public class HomeFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
-    }
-
-    private void setData() {
-//        pieChart.addPieSlice(
-//                new PieModel(
-//                        "R",
-//                        Integer.parseInt(tvR.getText().toString()),
-//                        Color.parseColor("#FFA726")));
-//        pieChart.addPieSlice(
-//                new PieModel(
-//                        "Python",
-//                        Integer.parseInt(tvPython.getText().toString()),
-//                        Color.parseColor("#66BB6A")));
-//        pieChart.addPieSlice(
-//                new PieModel(
-//                        "C++",
-//                        Integer.parseInt(tvCPP.getText().toString()),
-//                        Color.parseColor("#EF5350")));
-//        pieChart.addPieSlice(
-//                new PieModel(
-//                        "Java",
-//                        Integer.parseInt(tvJava.getText().toString()),
-//                        Color.parseColor("#29B6F6")));
     }
 }

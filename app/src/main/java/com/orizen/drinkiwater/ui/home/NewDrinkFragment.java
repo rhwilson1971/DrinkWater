@@ -85,7 +85,8 @@ public class NewDrinkFragment extends Fragment {
         Button button = (Button)root.findViewById(R.id.buttonAdd);
 
         button.setOnClickListener(v -> {
-            String amount = newDrinkViewModel.getDrinkAmount().getValue();
+            String amount =
+                    String.valueOf(newDrinkViewModel.getDrinkAmount().getValue());
             String name = newDrinkViewModel.getDrinkName().getValue();
 
             if(amount == null || name == null)
@@ -93,9 +94,9 @@ public class NewDrinkFragment extends Fragment {
 
             DrinkItem newDrink = new DrinkItem();
 
-            newDrink.Amount = Float.parseFloat(amount);
-            newDrink.Name = name;
-            newDrink.dateAdded = new Date();
+            newDrink.amount = Float.parseFloat(amount);
+            newDrink.name = name;
+            newDrink.added = new Date();
 
             DrinkAppRepository.getInstance().drinkItemDao().insert(newDrink);
 

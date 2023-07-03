@@ -24,7 +24,7 @@ public interface UserDao {
     @Insert
     void insertUser(User user);
 
-    @Query("SELECT * FROM users WHERE user_id = :id")
+    @Query("SELECT * FROM users WHERE userId = :id")
     void getUserById(int id);
 
     @Delete

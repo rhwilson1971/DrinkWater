@@ -13,10 +13,10 @@ import java.util.List;
 
 @Dao
 public interface DrinkItemDao {
-    @Query("SELECT * FROM drink_items where user_id = :user_id")
-    LiveData<List<DrinkItem>> getAll(Integer user_id);
+    @Query("SELECT * FROM drink_items where UserId = :userId")
+    LiveData<List<DrinkItem>> getAll(Integer userId);
 
-    @Query("SELECT * FROM drink_items where drink_item_id = :drinkItemId")
+    @Query("SELECT * FROM drink_items where drinkItemId = :drinkItemId")
     LiveData<DrinkItem> getDrinkItemById(Integer drinkItemId);
 
     @Insert
