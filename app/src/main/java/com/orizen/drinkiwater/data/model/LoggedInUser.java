@@ -9,19 +9,13 @@ import com.orizen.drinkiwater.data.entities.User;
  */
 public class LoggedInUser {
 
-    private String userId;
-    private String displayName;
+    private final String displayName;
 
-    private LiveData<User> user;
+    private final User dbUser;
 
-    public LoggedInUser(String userId, String displayName, LiveData<User> dbUser) {
-        this.userId = userId;
-        this.displayName = displayName;
-        this.user = dbUser;
-    }
-
-    public String getUserId() {
-        return userId;
+    public LoggedInUser(User dbUser) {
+        this.displayName = dbUser.displayName;
+        this.dbUser = dbUser;
     }
 
     public String getDisplayName() {

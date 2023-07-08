@@ -30,9 +30,7 @@ public class LoginDataSource {
             } else {
                 LoggedInUser fakeUser =
                         new LoggedInUser(
-                                user.getValue().Email,
-                                user.getValue().displayName,
-                                user);
+                                user.getValue());
 
                 return new Result.Success<>(fakeUser);
             }

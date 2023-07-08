@@ -20,7 +20,6 @@ public class DrinkItemEntry {
     public String getDrinkName() { return drinkName; }
     public Float getAmount() { return amount; }
 
-
     public static ArrayList<DrinkItemEntry> getDummyContent() {
         ArrayList<DrinkItemEntry> drinkItems = new ArrayList<DrinkItemEntry>();
         drinkItems.add(new DrinkItemEntry(1, "Water", 4.0f));
