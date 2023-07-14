@@ -14,6 +14,6 @@ public class DrinkItem {
     public String name;
     public Float amount;
     public String measure;
-    public Date added;
-    public Date updated;
+    public Date dateAdded;
+    public Date dateUpdated;
 }

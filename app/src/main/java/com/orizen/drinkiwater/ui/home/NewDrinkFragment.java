@@ -96,7 +96,7 @@ public class NewDrinkFragment extends Fragment {
 
             newDrink.amount = Float.parseFloat(amount);
             newDrink.name = name;
-            newDrink.added = new Date();
+            newDrink.dateAdded = new Date();
 
             DrinkAppRepository.getInstance().drinkItemDao().insert(newDrink);
 

@@ -5,6 +5,7 @@ import android.app.Activity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -22,6 +23,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.orizen.drinkiwater.MainActivity;
 import com.orizen.drinkiwater.R;
 import com.orizen.drinkiwater.data.AppDatabase;
 import com.orizen.drinkiwater.data.DrinkAppRepository;
@@ -122,7 +124,8 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 loadingProgressBar.setVisibility(View.VISIBLE);
-                loginViewModel.login(usernameEditText.getText().toString(),
+                loginViewModel.login(
+                        usernameEditText.getText().toString(),
                         passwordEditText.getText().toString());
 
             }
@@ -133,9 +136,17 @@ public class LoginActivity extends AppCompatActivity {
         String welcome = getString(R.string.welcome) + model.getDisplayName();
         // TODO : initiate successful logged in experience
         Toast.makeText(getApplicationContext(), welcome, Toast.LENGTH_LONG).show();
+
+        startMainActivity();
     }
 
     private void showLoginFailed(@StringRes Integer errorString) {
         Toast.makeText(getApplicationContext(), errorString, Toast.LENGTH_SHORT).show();
+    }
+
+    private void startMainActivity() {
+        Intent intentMain = new Intent(this, MainActivity.class);
+        intentMain.putExtra("user", loginViewModel.getLoginResult().getValue().getSuccess().getUser());
+        startActivity(intentMain);
     }
 }

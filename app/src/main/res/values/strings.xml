@@ -69,4 +69,6 @@
     <string name="drink_name_hint">Water, Soda, etc.</string>
     <string name="drink_item_content_description">Drinking cup</string>
     <string name="drink_summary_text">Drinks today</string>
+    <string name="signup_success">Hooray! You\'re in, start journaling your drinks!</string>
+    <string name="start">Start</string>
 </resources>

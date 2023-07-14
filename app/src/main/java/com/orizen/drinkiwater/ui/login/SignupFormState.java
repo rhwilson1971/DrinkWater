@@ -1,4 +1,4 @@
-package com.orizen.drinkiwater.ui.signup;
+package com.orizen.drinkiwater.ui.login;
 
 import androidx.annotation.Nullable;
 

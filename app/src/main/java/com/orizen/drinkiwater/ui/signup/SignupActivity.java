@@ -46,6 +46,8 @@ public class SignupActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+
+
     }
 
     @Override

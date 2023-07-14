@@ -13,13 +13,18 @@ public class DrinkAppRepository {
     }
 
     public static synchronized  void create(Context context) {
-        if (instance == null) {
-            instance = Room.databaseBuilder(context.getApplicationContext(),
-                    AppDatabase.class, DATABASE_NAME)
-                    .allowMainThreadQueries()
-                    .fallbackToDestructiveMigration()
-                    .build();
+//        if (instance == null) {
+//            instance = Room.databaseBuilder(context,
+//                    AppDatabase.class, DATABASE_NAME)
+//                    .allowMainThreadQueries()
+//                    .fallbackToDestructiveMigration()
+//                    .build();
+//
+//        }
 
+        if(instance == null) {
+            instance = Room.databaseBuilder(context,
+                    AppDatabase.class, DATABASE_NAME).build();
         }
     }
 

@@ -1,4 +1,4 @@
-package com.orizen.drinkiwater.ui.signup;
+package com.orizen.drinkiwater.ui.login;
 
 import android.util.Patterns;
 
@@ -14,7 +14,7 @@ import com.orizen.drinkiwater.data.model.LoggedInUser;
 public class SignupViewModel extends ViewModel {
 
     private MutableLiveData<SignupFormState> signupFormState = new MutableLiveData<>();
-    // private MutableLiveData<LoginResult> loginResult = new MutableLiveData<>();
+    private MutableLiveData<LoginResult> loginResult = new MutableLiveData<>();
     private LoginRepository loginRepository;
 
     SignupViewModel(LoginRepository loginRepository) {
@@ -25,20 +25,20 @@ public class SignupViewModel extends ViewModel {
         return signupFormState;
     }
 
-//    LiveData<LoginResult> getLoginResult() {
-//        return loginResult;
-//    }
+    LiveData<LoginResult> getLoginResult() {
+        return loginResult;
+    }
 
-    public void login(String username, String password) {
+    public void login(String username, String password, String passwordConfirmed) {
         // can be launched in a separate asynchronous job
-        Result<LoggedInUser> result = loginRepository.login(username, password);
+        Result<LoggedInUser> result = loginRepository.signup(username, password, passwordConfirmed);
 
-//        if (result instanceof Result.Success) {
-//            LoggedInUser data = ((Result.Success<LoggedInUser>) result).getData();
-//            loginResult.setValue(new LoginResult(new LoggedInUserView(data.getDisplayName())));
-//        } else {
-//            loginResult.setValue(new LoginResult(R.string.login_failed));
-//        }
+        if (result instanceof Result.Success) {
+            LoggedInUser data = ((Result.Success<LoggedInUser>) result).getData();
+            loginResult.setValue(new LoginResult(new LoggedInUserView(data.getDbUser(), data.getDisplayName())));
+        } else {
+            loginResult.setValue(new LoginResult(R.string.login_failed));
+        }
     }
 
     public void loginDataChanged(String username, String password) {
