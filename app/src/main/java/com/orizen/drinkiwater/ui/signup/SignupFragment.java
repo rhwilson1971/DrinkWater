@@ -10,6 +10,9 @@ import android.widget.EditText;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavDirections;
+import androidx.navigation.fragment.NavHostFragment;
+
 
 import com.orizen.drinkiwater.data.DrinkAppRepository;
 import com.orizen.drinkiwater.data.entities.User;
@@ -40,26 +43,14 @@ public class SignupFragment extends Fragment {
         final EditText confirmPasswordEditText = binding.editTextConfirmPassword;
         final Button saveButton = binding.buttonSaveUser;
 
-        saveButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                User user = new User();
+        saveButton.setOnClickListener(view -> {
+            User user = new User();
 
-                user.name = fullNameText.getText().toString();
-                user.email = emailEditText.getText().toString();
-                user.password = passwordEditText.getText().toString();
+            user.name = fullNameText.getText().toString();
+            user.email = emailEditText.getText().toString();
+            user.password = passwordEditText.getText().toString();
 
-                User found =
-                DrinkAppRepository.getInstance().userDao().findByUser(user.name, user.email, user.password).getValue();
 
-                if(found == null) {
-                    DrinkAppRepository.getInstance().userDao().insertUser(user);
-
-                    if(user.userId > 0){
-                        // success go back to
-                    }
-                }
-            }
         });
 
         return binding.getRoot();
@@ -68,17 +59,7 @@ public class SignupFragment extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        binding.buttonSaveUser.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-//                NavHostFragment.findNavController(SignupFragment.this)
-//                        .navigate(R.id.action_FirstFragment_to_SecondFragment);
-
-
-
-                //binding.errorMessagesView
-            }
-        });
+        binding.buttonSaveUser.setOnClickListener(view1 -> signupUser());
     }
 
     @Override
@@ -87,4 +68,27 @@ public class SignupFragment extends Fragment {
         binding = null;
     }
 
+    private void signupUser() {
+
+        User user = new User();
+
+        user.email = binding.editTextEmailAddress.toString();
+        user.name = binding.editTextFullName.toString();
+        user.password = binding.editTextPassword.toString();
+        user.password = binding.editTextConfirmPassword.toString();
+        user.displayName = user.name;
+
+        User found =
+                DrinkAppRepository.getInstance().userDao().findByUser(user.name, user.email, user.password).getValue();
+
+        if(found == null) {
+            DrinkAppRepository.getInstance().userDao().insertUser(user);
+
+            if(user.userId > 0){
+                NavDirections action =
+                    SignupFragmentDirections.actionSignupFragmentToSignupStatusFragment(user);
+                NavHostFragment.findNavController(SignupFragment.this).navigate(action);
+            }
+        }
+    }
 }

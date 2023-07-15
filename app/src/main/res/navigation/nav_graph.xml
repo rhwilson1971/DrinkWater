@@ -3,26 +3,29 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/FirstFragment">
+    app:startDestination="@id/SignupFragment">
 
     <fragment
-        android:id="@+id/FirstFragment"
+        android:id="@+id/SignupFragment"
         android:name="com.orizen.drinkiwater.ui.signup.SignupFragment"
-        android:label="@string/first_fragment_label"
+        android:label="@string/signup_fragment_label"
         tools:layout="@layout/fragment_signup">
 
         <action
-            android:id="@+id/action_FirstFragment_to_SecondFragment"
-            app:destination="@id/SecondFragment" />
+            android:id="@+id/action_SignupFragment_to_SignupStatusFragment"
+            app:destination="@id/SignupStatusFragment" />
     </fragment>
     <fragment
-        android:id="@+id/SecondFragment"
+        android:id="@+id/SignupStatusFragment"
         android:name="com.orizen.drinkiwater.ui.signup.SignupStatusFragment"
-        android:label="@string/second_fragment_label"
+        android:label="@string/signupstatus_fragment_label"
         tools:layout="@layout/fragment_signup_status">
 
         <action
-            android:id="@+id/action_SecondFragment_to_FirstFragment"
-            app:destination="@id/FirstFragment" />
+            android:id="@+id/action_SignupStatusFragment_to_SignupFragment"
+            app:destination="@id/SignupFragment" />
+        <argument
+            android:name="newUser"
+            app:argType="com.orizen.drinkiwater.data.entities.User" />
     </fragment>
 </navigation>

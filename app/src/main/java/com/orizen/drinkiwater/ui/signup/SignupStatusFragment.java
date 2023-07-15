@@ -8,10 +8,8 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.fragment.NavHostFragment;
 
 import com.orizen.drinkiwater.MainActivity;
-import com.orizen.drinkiwater.R;
 import com.orizen.drinkiwater.databinding.FragmentSignupStatusBinding;
 
 public class SignupStatusFragment extends Fragment {
@@ -27,22 +25,18 @@ public class SignupStatusFragment extends Fragment {
 
         binding = FragmentSignupStatusBinding.inflate(inflater, container, false);
         return binding.getRoot();
-
     }
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        binding.buttonStart.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        binding.buttonStart.setOnClickListener(view1 -> {
 //                NavHostFragment.findNavController(SignupStatusFragment.this)
 //                        .navigate(R.id.action_SecondFragment_to_FirstFragment);
 
-                Intent intent = new Intent(getContext(), MainActivity.class);
 
 
-            }
+
         });
     }
 

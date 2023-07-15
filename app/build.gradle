@@ -1,15 +1,17 @@
 plugins {
+
     id 'com.android.application'
+    id 'androidx.navigation.safeargs'
 }
 
 android {
     namespace 'com.orizen.drinkiwater'
-    compileSdk 34
+    compileSdk 33
 
     defaultConfig {
         applicationId "com.orizen.drinkiwater"
-        minSdk 28
-        targetSdk 34
+        minSdk 33
+        targetSdk 33
         versionCode 1
         versionName "1.0"
 
@@ -38,6 +40,9 @@ android {
     buildFeatures {
         viewBinding true
     }
+
+
+
 }
 
 dependencies {
