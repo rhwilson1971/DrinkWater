@@ -13,23 +13,23 @@ import com.orizen.drinkiwater.data.model.LoggedInUser;
 
 public class SignupViewModel extends ViewModel {
 
-    private MutableLiveData<SignupFormState> signupFormState = new MutableLiveData<>();
-    private MutableLiveData<LoginResult> loginResult = new MutableLiveData<>();
-    private LoginRepository loginRepository;
+    private final MutableLiveData<SignupFormState> signupFormState = new MutableLiveData<>();
+    private final MutableLiveData<LoginResult> loginResult = new MutableLiveData<>();
+    private final LoginRepository loginRepository;
 
     SignupViewModel(LoginRepository loginRepository) {
         this.loginRepository = loginRepository;
     }
 
-    LiveData<SignupFormState> getLoginFormState() {
+    public LiveData<SignupFormState> getSignupFormState() {
         return signupFormState;
     }
 
-    LiveData<LoginResult> getLoginResult() {
+    public LiveData<LoginResult> getLoginResult() {
         return loginResult;
     }
 
-    public void login(String username, String password, String passwordConfirmed) {
+    public void signup(String username, String password, String passwordConfirmed) {
         // can be launched in a separate asynchronous job
         Result<LoggedInUser> result = loginRepository.signup(username, password, passwordConfirmed);
 
@@ -41,11 +41,13 @@ public class SignupViewModel extends ViewModel {
         }
     }
 
-    public void loginDataChanged(String username, String password) {
+    public void signupDataChanged(String username, String password, String confirmPassword) {
         if (!isUserNameValid(username)) {
             signupFormState.setValue(new SignupFormState(R.string.invalid_username, null));
         } else if (!isPasswordValid(password)) {
             signupFormState.setValue(new SignupFormState(null, R.string.invalid_password));
+        } else if (password.compareTo(confirmPassword)!=0) {
+            signupFormState.setValue(new SignupFormState(null, R.string.password_dont_match));
         } else {
             signupFormState.setValue(new SignupFormState(true));
         }
@@ -67,6 +69,4 @@ public class SignupViewModel extends ViewModel {
     private boolean isPasswordValid(String password) {
         return password != null && password.trim().length() > 5;
     }
-
-
 }

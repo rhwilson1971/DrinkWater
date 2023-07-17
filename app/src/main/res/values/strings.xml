@@ -26,7 +26,7 @@
     <string name="next" translatable="false">Next</string>
     <string name="previous" translatable="false">Previous</string>
 
-    <string name="lorem_ipsum">
+    <string name="lorem_ipsum" translatable="false">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in scelerisque sem. Mauris
         volutpat, dolor id interdum ullamcorper, risus dolor egestas lectus, sit amet mattis purus
         dui nec risus. Maecenas non sodales nisi, vel dictum dolor. Class aptent taciti sociosqu ad
@@ -71,4 +71,5 @@
     <string name="drink_summary_text">Drinks today</string>
     <string name="signup_success">Hooray! You\'re in, start journaling your drinks!</string>
     <string name="start">Start</string>
+    <string name="password_dont_match">Passwords do not match</string>
 </resources>

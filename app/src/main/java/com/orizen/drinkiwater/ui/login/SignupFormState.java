@@ -22,16 +22,16 @@ public class SignupFormState {
     }
 
     @Nullable
-    Integer getUsernameError() {
+    public Integer getUsernameError() {
         return usernameError;
     }
 
     @Nullable
-    Integer getPasswordError() {
+    public Integer getPasswordError() {
         return passwordError;
     }
 
-    boolean isDataValid() {
+    public boolean isDataValid() {
         return isDataValid;
     }
 }

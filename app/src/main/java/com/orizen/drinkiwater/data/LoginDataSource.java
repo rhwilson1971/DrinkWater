@@ -1,5 +1,7 @@
 package com.orizen.drinkiwater.data;
 
+import android.util.Log;
+
 import androidx.lifecycle.LiveData;
 
 import com.orizen.drinkiwater.data.entities.User;
@@ -18,24 +20,29 @@ public class LoginDataSource {
             // TODO: handle loggedInUser authentication
 
             LiveData<User> user = null;
+            LiveData<User> foundUser = null;
 
             if(null != DrinkAppRepository.getInstance()) {
                 user = DrinkAppRepository.getInstance().userDao().findByName(username);
 
-                if (user != null) {
+                if (user.getValue() != null) {
 
-                    user = DrinkAppRepository.getInstance().userDao().findByUserAndPassword(username, password);
 
-                    if (user == null ){
+
+
+                    DrinkAppRepository.getInstance().userDao().findByUserAndPassword(username, password);
+                    if (foundUser.getValue() == null ){
                         return new Result.Error(new IOException("Invalid credentials", null));
                     }
                 }
             }
 
-            if(null == user) {
+            if(null == user.getValue()) {
                 return new Result.Error(new IOException("User not found!", null));
+            } else if( foundUser.getValue() == null ) {
+                return new Result.Error(new IOException("Invalid credentials", null));
             } else {
-                LoggedInUser successUser = new LoggedInUser(user.getValue());
+                LoggedInUser successUser = new LoggedInUser(foundUser.getValue());
                 return new Result.Success<>(successUser);
             }
         } catch (Exception e) {

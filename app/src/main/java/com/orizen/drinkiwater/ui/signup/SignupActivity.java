@@ -11,14 +11,18 @@ import android.view.View;
 import android.widget.Toast;
 
 import androidx.core.view.WindowCompat;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import com.orizen.drinkiwater.data.DrinkAppRepository;
 import com.orizen.drinkiwater.databinding.ActivitySignupBinding;
 
 import com.orizen.drinkiwater.R;
+import com.orizen.drinkiwater.ui.login.LoginViewModelFactory;
+import com.orizen.drinkiwater.ui.login.SignupViewModel;
 
 public class SignupActivity extends AppCompatActivity {
 
@@ -46,8 +50,6 @@ public class SignupActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
-
-
     }
 
     @Override

@@ -57,10 +57,13 @@ public class LoginActivity extends AppCompatActivity {
             if (loginFormState == null) {
                 return;
             }
+
             loginButton.setEnabled(loginFormState.isDataValid());
+
             if (loginFormState.getUsernameError() != null) {
                 usernameEditText.setError(getString(loginFormState.getUsernameError()));
             }
+
             if (loginFormState.getPasswordError() != null) {
                 passwordEditText.setError(getString(loginFormState.getPasswordError()));
             }
@@ -121,13 +124,13 @@ public class LoginActivity extends AppCompatActivity {
                     passwordEditText.getText().toString());
             LoginResult result = loginViewModel.getLoginResult().getValue();
 
-
-            if(result.getSuccess() != null) {
-                startMainActivity();
-            } else {
-                startSignupActivity();
+            if (result != null) {
+                if (result.getSuccess() != null) {
+                    startMainActivity();
+                } else {
+                    startSignupActivity();
+                }
             }
-
         });
     }
 
@@ -145,7 +148,8 @@ public class LoginActivity extends AppCompatActivity {
 
     private void startMainActivity() {
         Intent intentMain = new Intent(this, MainActivity.class);
-        intentMain.putExtra("user", loginViewModel.getLoginResult().getValue().getSuccess().getUser());
+        LoginResult result = loginViewModel.getLoginResult().getValue();
+        intentMain.putExtra("user", result.getSuccess().getUser());
         startActivity(intentMain);
     }
 
