@@ -27,6 +27,8 @@ import com.orizen.drinkiwater.databinding.FragmentSignupBinding;
 import com.orizen.drinkiwater.ui.login.LoginViewModelFactory;
 import com.orizen.drinkiwater.ui.login.SignupViewModel;
 
+import java.util.List;
+
 public class SignupFragment extends Fragment {
 
     private FragmentSignupBinding binding;
@@ -136,7 +138,7 @@ public class SignupFragment extends Fragment {
         user.email = binding.editTextEmailAddress.toString();
         user.name = binding.editTextFullName.toString();
         user.password = binding.editTextPassword.toString();
-        user.displayName = user.name;
+        user.displayName = user.name.toString();
 
         User found =
                 DrinkAppRepository.getInstance().userDao().findByUser(user.name, user.email, user.password).getValue();
@@ -149,7 +151,16 @@ public class SignupFragment extends Fragment {
                 LiveData<User> savedUser=
                 DrinkAppRepository.getInstance().userDao().findByUserAndPassword(user.email, user.password);
 
-                if(savedUser.getValue().userId > 0){
+                List<User> allUsers=
+                DrinkAppRepository.getInstance().userDao().getAll().getValue();
+
+                if(allUsers == null) {
+
+                } else {
+
+                }
+
+                if(savedUser.getValue() != null){
                     NavDirections action =
                             SignupFragmentDirections.actionSignupFragmentToSignupStatusFragment(user);
                     NavHostFragment.findNavController(SignupFragment.this).navigate(action);
@@ -158,8 +169,6 @@ public class SignupFragment extends Fragment {
             catch(Exception e) {
                 Log.d("signup", e.getLocalizedMessage());
             }
-
-
         }
     }
 }

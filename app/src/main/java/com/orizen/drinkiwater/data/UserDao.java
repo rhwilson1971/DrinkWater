@@ -9,13 +9,14 @@ import androidx.room.Update;
 
 import com.orizen.drinkiwater.data.entities.User;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Dao
 public interface UserDao {
 
     @Query("SELECT * FROM users")
-    LiveData<User> getAll();
+    LiveData<List<User>> getAll();
 
     @Query("SELECT * FROM users WHERE email LIKE :email LIMIT 1")
     LiveData<User> findByName(String email);
