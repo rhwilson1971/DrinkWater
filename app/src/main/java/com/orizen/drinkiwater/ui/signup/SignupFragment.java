@@ -133,12 +133,10 @@ public class SignupFragment extends Fragment {
         if(password.length() < 5) return ;
         if(password.compareTo(confirmPassword) !=0) return;
 
-        User user = new User();
-
-        user.email = binding.editTextEmailAddress.toString();
-        user.name = binding.editTextFullName.toString();
-        user.password = binding.editTextPassword.toString();
-        user.displayName = user.name.toString();
+        User user = new User(binding.editTextFullName.getText().toString(),
+                binding.editTextEmailAddress.getText().toString(),
+                binding.editTextPassword.getText().toString()
+                );
 
         User found =
                 DrinkAppRepository.getInstance().userDao().findByUser(user.name, user.email, user.password).getValue();
@@ -152,12 +150,12 @@ public class SignupFragment extends Fragment {
                 DrinkAppRepository.getInstance().userDao().findByUserAndPassword(user.email, user.password);
 
                 List<User> allUsers=
-                DrinkAppRepository.getInstance().userDao().getAll().getValue();
+                DrinkAppRepository.getInstance().userDao().getAll();
 
                 if(allUsers == null) {
-
+                    Log.d("signup", "got no users");
                 } else {
-
+                    Log.d("signup", "got all users");
                 }
 
                 if(savedUser.getValue() != null){

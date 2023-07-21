@@ -19,13 +19,13 @@ public class LoginDataSource {
         try {
             // TODO: handle loggedInUser authentication
 
-            LiveData<User> user = null;
+            User user = null;
             LiveData<User> foundUser = null;
 
             if(null != DrinkAppRepository.getInstance()) {
                 user = DrinkAppRepository.getInstance().userDao().findByName(username);
 
-                if (user.getValue() != null) {
+                if (user != null) {
 
 
 
@@ -37,7 +37,7 @@ public class LoginDataSource {
                 }
             }
 
-            if(null == user.getValue()) {
+            if(null == user) {
                 return new Result.Error(new IOException("User not found!", null));
             } else if( foundUser.getValue() == null ) {
                 return new Result.Error(new IOException("Invalid credentials", null));

@@ -16,10 +16,10 @@ import java.util.List;
 public interface UserDao {
 
     @Query("SELECT * FROM users")
-    LiveData<List<User>> getAll();
+    List<User> getAll();
 
     @Query("SELECT * FROM users WHERE email LIKE :email LIMIT 1")
-    LiveData<User> findByName(String email);
+    User findByName(String email);
 
     @Query("SELECT * FROM users WHERE email = :email AND password =:password AND name=:userName")
     LiveData<User> findByUser(String userName, String email, String password);
